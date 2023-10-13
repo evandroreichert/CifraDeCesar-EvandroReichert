@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Cifra de Cesar</title>
 </head>
+
 <body>
 
     <header></header>
 
     <main>
 
-        <h1>Cifra de Cesar</h1>
+        <div class="container">
+            <h1>Cifra de Cesar</h1>
+            <div class="entrada">
+                <label for="iOut">Entrada</label>
+                <textarea id="inputCifra" cols="30" rows="10"></textarea>
+            </div>
+            <div class="cifra">
+                <label for="iChave">Cifra: </label>
+                <input type="text" id="iChave">
+            </div>
+            <div class="radios">
+                <div class="cifrar">
+                    <input type="radio" name="iCesar" id="iCifra" value="cripto">
+                    <label for="iCifra">Criptografar</label>
+                </div>
+                <div class="decifrar">
+                    <input type="radio" name="iCesar" id="iDecifra" value="decripto">
+                    <label for="iDecifra">Descriptografar</label>
+                </div>
+            </div>
+            <button type="button" class="btn">Resultado</button>
+            <div class="saida">
+                <label for="iOut">Saída</label>
+                <textarea id="iOut" cols="30" rows="10"></textarea>
+            </div>
+        </div>
 
-        <textarea id="inputCifra" cols="30" rows="10"></textarea>
-
-        <input type="radio" name="iCesar" id="iCifra">
-        <label for="iCifra">Criptografar</label>
-
-        <input type="radio" name="iCesar" id="iDecifra">
-        <label for="iDecifra">Descriptografar</label>
-
-        <label for="iChave">Cifra: </label>
-        <input type="text" id="iChave">
-
-        <button type="button">Resultado</button>
 
     </main>
 
@@ -33,9 +49,63 @@
 
     <script>
 
+        let alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let btn = document.querySelector('.btn')
+        let out = document.querySelector('#iOut')
 
+        btn.addEventListener('click', () => {
+            let input = document.querySelector('#inputCifra').value
+            let cifra = Number(document.querySelector('#iChave').value)
+            let metodo = document.querySelector('input[type="radio"]:checked').value
+            let resultado = ''
+
+            for (let i = 0; i < input.length; i++) {
+                const char = input[i]
+                let novoChar = char
+
+
+                // verifica se o caractere é uma letra maiúscula
+                if (char.match(/[A-Z]/)) {
+                    let indice = alfabeto.indexOf(char)
+
+                    if (metodo == 'cripto') {
+                        // garante que o índice permaneça no intervalo de 0 a 25
+                        indice = (indice + cifra) % 26
+                    } else{
+                        indice = (indice - cifra) % 26
+                        if (indice < 0) {
+                            indice += 26
+                        }
+                    }
+
+                    novoChar = alfabeto.charAt(indice)
+
+                    // verifica se o caractere é uma letra minúscula e a converte 
+                } else if(char.match(/[a-z]/)){
+                    let indice = alfabeto.indexOf(char.toUpperCase())
+
+                    if (metodo == 'cripto') {
+                        indice = (indice + cifra) % 26
+                    } else{
+                        indice = (indice - cifra) % 26
+                        if (indice < 0) {
+                            indice += 26
+                        }
+                    }
+
+                    novoChar = alfabeto.charAt(indice).toLocaleLowerCase()
+                }
+
+                resultado += novoChar
+             
+            }
+
+            console.log(resultado);
+            out.value = resultado
+        })
 
     </script>
-    
+
 </body>
+
 </html>
