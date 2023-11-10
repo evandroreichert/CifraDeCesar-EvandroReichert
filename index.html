@@ -4,107 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Cifra de Cesar</title>
+
+
 </head>
 
-<body>
+<body class="dark bg-gray-100 flex items-center justify-center h-screen">
 
-    <header></header>
+    <video autoplay muted loop id="myVideo">
+        <source src="1.mp4" type="video/mp4">
+    </video>
 
-    <main>
+    <main class="bg-white p-6 rounded-lg shadow-md max-w-md w-full z-10">
 
-        <div class="container">
-            <h1>Cifra de Cesar</h1>
-            <div class="entrada">
-                <label for="iOut">Entrada</label>
-                <textarea id="inputCifra" cols="30" rows="10"></textarea>
-            </div>
-            <div class="cifra">
-                <label for="iChave">Cifra: </label>
-                <input type="text" id="iChave">
-            </div>
-            <div class="radios">
-                <div class="cifrar">
-                    <input type="radio" name="iCesar" id="iCifra" value="cripto">
+        <h1 class="text-4xl font-extrabold mb-4 text-center">Cifra de César</h1>
+
+        <div class="mb-4">
+            <label for="inputCifra" class="block text-gray-700 text-lg font-semibold mb-2">Entrada:</label>
+            <textarea id="inputCifra"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" cols="30"
+                rows="3"></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="iChave" class="block text-gray-700 text-lg font-semibold mb-2">Chave da Cifra:</label>
+            <input type="text" id="iChave"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Ex: 7">
+        </div>
+        <label class="block text-gray-700 text-lg font-semibold mb-2">Operação:</label>
+        <div class="mb-4 ">
+            <div class="flex gap-10 my-5 justify-center">
+                <div class="flex items-center">
+                    <input type="radio" name="iCesar" id="iCifra" value="cripto" class="mr-2" checked>
                     <label for="iCifra">Criptografar</label>
                 </div>
-                <div class="decifrar">
-                    <input type="radio" name="iCesar" id="iDecifra" value="decripto">
+                <div class="flex items-center">
+                    <input type="radio" name="iCesar" id="iDecifra" value="decripto" class="mr-2">
                     <label for="iDecifra">Descriptografar</label>
                 </div>
             </div>
-            <button type="button" class="btn">Resultado</button>
-            <div class="saida">
-                <label for="iOut">Saída</label>
-                <textarea id="iOut" cols="30" rows="10"></textarea>
-            </div>
+        </div>
+        <div class="flex justify-center">
+            <button type="button"
+                class="bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Resultado</button>
         </div>
 
 
+
+        <div class="mt-4">
+            <label for="iOut" class="block text-gray-700 text-lg font-semibold mb-2">Saída:</label>
+            <textarea id="iOut"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" cols="30"
+                rows="3"></textarea>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="https://pt.wikipedia.org/wiki/Cifra_de_C%C3%A9sar" target="_blank"
+                class="text-green-500 hover:underline">Saiba mais sobre a Cifra de César</a>
+        </div>
+
     </main>
 
-    <footer></footer>
-
-
-    <script>
-
-        let alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let btn = document.querySelector('.btn')
-        let out = document.querySelector('#iOut')
-
-        btn.addEventListener('click', () => {
-            let input = document.querySelector('#inputCifra').value
-            let cifra = Number(document.querySelector('#iChave').value)
-            let metodo = document.querySelector('input[type="radio"]:checked').value
-            let resultado = ''
-
-            for (let i = 0; i < input.length; i++) {
-                const char = input[i]
-                let novoChar = char
-
-
-                // verifica se o caractere é uma letra maiúscula
-                if (char.match(/[A-Z]/)) {
-                    let indice = alfabeto.indexOf(char)
-
-                    if (metodo == 'cripto') {
-                        // garante que o índice permaneça no intervalo de 0 a 25
-                        indice = (indice + cifra) % 26
-                    } else{
-                        indice = (indice - cifra) % 26
-                        if (indice < 0) {
-                            indice += 26
-                        }
-                    }
-
-                    novoChar = alfabeto.charAt(indice)
-
-                    // verifica se o caractere é uma letra minúscula e a converte 
-                } else if(char.match(/[a-z]/)){
-                    let indice = alfabeto.indexOf(char.toUpperCase())
-
-                    if (metodo == 'cripto') {
-                        indice = (indice + cifra) % 26
-                    } else{
-                        indice = (indice - cifra) % 26
-                        if (indice < 0) {
-                            indice += 26
-                        }
-                    }
-
-                    novoChar = alfabeto.charAt(indice).toLocaleLowerCase()
-                }
-
-                resultado += novoChar
-             
-            }
-
-            console.log(resultado);
-            out.value = resultado
-        })
-
-    </script>
+    <script src="index.js"></script>
 
 </body>
 
