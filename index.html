@@ -7,33 +7,34 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Cifra de Cesar</title>
-
-
 </head>
 
-<body class="dark bg-gray-100 flex items-center justify-center h-screen">
+<body class="dark bg-gray-100 flex flex-col items-center justify-center min-h-screen">
 
-    <video autoplay muted loop id="myVideo">
+    <video autoplay muted loop id="myVideo" class="object-cover w-full h-full absolute top-0 left-0">
         <source src="1.mp4" type="video/mp4">
     </video>
 
-    <main class="bg-white p-6 rounded-lg shadow-md max-w-md w-full z-10">
+    <main class="bg-white p-6 rounded-lg shadow-md max-w-md w-full z-10 text-center">
 
-        <h1 class="text-4xl font-extrabold mb-4 text-center">Cifra de César</h1>
+        <h1 class="text-4xl font-extrabold mb-4">Cifra de César</h1>
 
         <div class="mb-4">
-            <label for="inputCifra" class="block text-gray-700 text-lg font-semibold mb-2">Entrada:</label>
+            <label for="inputCifra" class="block text-gray-700 text-lg font-semibold mb-2">Texto de Entrada:</label>
             <textarea id="inputCifra"
-                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" cols="30"
-                rows="3"></textarea>
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-green-300"
+                placeholder="Digite o texto a ser cifrado ou decifrado..." rows="3"></textarea>
         </div>
+
         <div class="mb-4">
             <label for="iChave" class="block text-gray-700 text-lg font-semibold mb-2">Chave da Cifra:</label>
-            <input type="text" id="iChave"
-                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Ex: 7">
+            <input type="number" id="iChave"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-green-300"
+                placeholder="Ex: 7">
         </div>
-        <label class="block text-gray-700 text-lg font-semibold mb-2">Operação:</label>
+
         <div class="mb-4 ">
+            <label class="block text-gray-700 text-lg font-semibold mb-2">Operação:</label>
             <div class="flex gap-10 my-5 justify-center">
                 <div class="flex items-center">
                     <input type="radio" name="iCesar" id="iCifra" value="cripto" class="mr-2" checked>
@@ -45,18 +46,19 @@
                 </div>
             </div>
         </div>
+
         <div class="flex justify-center">
             <button type="button"
-                class="bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">Resultado</button>
+                class="bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">
+                Criar Resultado
+            </button>
         </div>
 
-
-
         <div class="mt-4">
-            <label for="iOut" class="block text-gray-700 text-lg font-semibold mb-2">Saída:</label>
+            <label for="iOut" class="block text-gray-700 text-lg font-semibold mb-2">Texto de Saída:</label>
             <textarea id="iOut"
-                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" cols="30"
-                rows="3"></textarea>
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-green-300"
+                cols="30" rows="3" readonly></textarea>
         </div>
 
         <div class="text-center mt-4">
